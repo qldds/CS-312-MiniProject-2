@@ -59,7 +59,7 @@ app.post('/search', async (req, res) => {
     res.render('result', { cocktails: drinks, title: `Results for "${query}"` });
   } catch (err) {
     console.error(err.message || err);
-    res.render('error', { message: 'Error fetching data from the Cocktail API. Try again later.' });
+    res.render('error', { message: 'Error getting data from the Cocktail API. Try again later.' });
   }
 });
 
@@ -69,7 +69,7 @@ app.get('/random', async (req, res) => {
     const apiUrl = `https://www.thecocktaildb.com/api/json/v1/1/random.php`;
     const response = await axios.get(apiUrl);
     const drink = response.data.drinks && response.data.drinks[0];
-    if (!drink) return res.render('error', { message: 'No cocktail returned. Try again.' });
+    if (!drink) return res.render('error', { message: 'No cocktail returned. Pleased Try again.' });
 
     const cocktail = {
       id: drink.idDrink,
@@ -85,7 +85,7 @@ app.get('/random', async (req, res) => {
     res.render('result', { cocktails: [cocktail], title: 'Random Cocktail' });
   } catch (err) {
     console.error(err);
-    res.render('error', { message: 'Error fetching random cocktail.' });
+    res.render('error', { message: 'Error getting random cocktail.' });
   }
 });
 
