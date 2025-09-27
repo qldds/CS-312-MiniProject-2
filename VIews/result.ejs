@@ -1,0 +1,35 @@
+<%- include('partials/header', { title: title || 'Results' }) %>
+
+<section class="results">
+  <h2><%= title %></h2>
+
+  <% cocktails.forEach(function(drink) { %>
+    <article class="cocktail-card">
+      <div class="thumb">
+        <% if (drink.thumbnail) { %>
+          <img src="<%= drink.thumbnail %>" alt="<%= drink.name %> thumbnail" />
+        <% } else { %>
+          <div class="no-thumb">No image</div>
+        <% } %>
+      </div>
+
+      <div class="meta">
+        <h3><%= drink.name %></h3>
+        <p><strong>Category:</strong> <%= drink.category %> • <strong><%= drink.alcoholic %></strong></p>
+        <p><strong>Glass:</strong> <%= drink.glass %></p>
+        <h4>Ingredients</h4>
+        <ul>
+          <% drink.ingredients.forEach(function(it) { %>
+            <li><%= it.measure %> <%= it.ingredient %></li>
+          <% }) %>
+        </ul>
+        <h4>Instructions</h4>
+        <p><%= drink.instructions %></p>
+      </div>
+    </article>
+  <% }) %>
+
+  <a class="btn-primary" href="/">Back</a>
+</section>
+
+<%- include('partials/footer') %>
