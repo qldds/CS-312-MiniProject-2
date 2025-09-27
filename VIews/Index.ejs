@@ -1,0 +1,16 @@
+<%- include('partials/header', { title: 'Cocktail Finder - Home' }) %>
+
+<section class="hero">
+  <h2>Search cocktails by name or get a random recipe</h2>
+
+  <form action="/search" method="POST" class="search-form">
+    <label for="query">Cocktail name:</label>
+    <input id="query" name="query" type="text" placeholder="e.g., Margarita" required />
+    <button type="submit">Search</button>
+    <a class="btn-secondary" href="/random">Get Random Cocktail</a>
+  </form>
+
+  <p class="note">Uses TheCocktailDB public API — no authentication required.</p>
+</section>
+
+<%- include('partials/footer') %>
