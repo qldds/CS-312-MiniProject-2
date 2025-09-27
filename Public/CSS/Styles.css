@@ -7,7 +7,7 @@
 
 *{box-sizing:border-box}
 body{
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: system-ui, -apple-system, "poppins", Arial, "Helvetica Neue", Arial;
   margin:0;
   color:#222;
   background:var(--bg);
