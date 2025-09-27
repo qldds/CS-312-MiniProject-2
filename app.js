@@ -5,13 +5,13 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Express setup
+// basic setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Helper: assemble ingredient list from API cocktail object
+// use/get ingredient list from API cocktail object
 function extractIngredients(drink) {
   const ingredients = [];
   for (let i = 1; i <= 15; i++) {
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// POST /search -> search by cocktail name
+// POST /search by cocktail name
 app.post('/search', async (req, res) => {
   const { query } = req.body;
   if (!query || query.trim() === '') {
@@ -45,7 +45,7 @@ app.post('/search', async (req, res) => {
     if (!data || !data.drinks) {
       return res.render('error', { message: `No cocktails found for "${query}". Try another name.` });
     }
-    // pass array of cocktails to template
+    // pass all of the cocktails to template
     const drinks = data.drinks.map(drink => ({
       id: drink.idDrink,
       name: drink.strDrink,
@@ -63,7 +63,7 @@ app.post('/search', async (req, res) => {
   }
 });
 
-// GET /random -> random cocktail
+// GET /random -> gets random cocktail
 app.get('/random', async (req, res) => {
   try {
     const apiUrl = `https://www.thecocktaildb.com/api/json/v1/1/random.php`;
@@ -89,10 +89,10 @@ app.get('/random', async (req, res) => {
   }
 });
 
-// optional about
+// the optional about
 app.get('/about', (req, res) => res.render('about'));
 
-// 404
+// 404/error
 app.use((req, res) => {
   res.status(404).render('error', { message: 'Page not found.' });
 });
